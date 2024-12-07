@@ -26,19 +26,14 @@ class FormsController < ApplicationController
     @form = Form.new(form_params)
 
     if @form.save
-
-      # Llama al servicio OpenAI con el name y description
-      service = OpenServices.new
+      # Generar la respuesta usando el servicio
+      service = OpenService.new
       service.generate_and_store_response(@form)
 
-     respuesta = openai_service.generate_and_store_response(@form.id, @form.name, @form.description)
-     puts "esta es la respuesta"
-     puts respuesta
-
-      redirect_to @form, notice: "Formulario creado y respuesta generada."
+      redirect_to @form, notice: "Formulario creado y procesado con éxito."
+    else
+      render :new, status: :unprocessable_entity
     end
-  rescue StandardError => e
-      puts respuesta, e.message, status: :unprocessable_entity
   end
 
 

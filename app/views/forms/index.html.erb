@@ -1,16 +1,29 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Forms" %>
-
-<h1>Forms</h1>
-
-<div id="forms">
-  <% @forms.each do |form| %>
-    <%= render form %>
-    <p>
-      <%= link_to "Show this form", form %>
-    </p>
+<div class="p-6 max-w-6xl mx-auto bg-white rounded-lg shadow-md">
+  <!-- Notificación -->
+  <% if notice.present? %>
+    <p class="text-green-600 font-semibold mb-4"><%= notice %></p>
   <% end %>
+
+  <!-- Título -->
+  <% content_for :title, "Forms" %>
+   <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Forms</h1>
+
+
+  <!-- Lista de formularios -->
+  <div id="forms" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <% @forms.each do |form| %>
+      <div class="p-4 bg-gray-50 rounded-lg shadow-md">
+        <%= render form %>
+        <p class="mt-4 text-center">
+          <%= link_to "Show this form", form, class: "px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition duration-200" %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Enlace para crear un nuevo formulario -->
+  <div class="mt-6 text-center">
+    <%= link_to "New form", new_form_path, class: "px-6 py-3 bg-green-600 text-white font-semibold rounded-md shadow-md hover:bg-green-700 transition duration-200" %>
+  </div>
 </div>
 
-<%= link_to "New form", new_form_path %>

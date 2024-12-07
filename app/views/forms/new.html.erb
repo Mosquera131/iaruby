@@ -1,11 +1,23 @@
 <% content_for :title, "New form" %>
 
-<h1>New form</h1>
+
 
 <%= render "form", form: @form %>
 
 <br>
 
-<div>
-  <%= link_to "Back to forms", forms_path %>
+<div class="mt-4">
+  <%= link_to "Back to forms", forms_path, class: "px-6 py-3 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition duration-200" %>
 </div>
+
+
+<% if @form.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@form.errors.count, "error") %> prohibió que este formulario se guarde:</h2>
+    <ul>
+      <% @form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

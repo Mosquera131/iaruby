@@ -5,28 +5,38 @@ class OpenService
     @client = OpenAI::Client.new(access_token: ENV["OPENAI_ACCESS_TOKEN"])
   end
 
-  # Genera un texto basado en el description proporcionado
-  def generate_and_store_response(description)
+  def generate_and_store_response(form)
     begin
-
-      Rails.logger.info("#{description}")
-      # Llama a la API de OpenAI con las instrucciones y el límite de longitud
+      # Llamar a la API de OpenAI para generar la respuesta
       response = @client.chat(
         parameters: {
           model: "gpt-3.5-turbo",
-          messages: [ { role: "user", content: description } ],
+          messages: [ { role: "user", content: form.description } ],
           temperature: 0.7,
-          max_tokens: 50 # max_tokens controla la longitud del texto generado
+          max_tokens: 150
         }
       )
 
-      # Extrae el contenido de la respuesta
+      # Extraer el contenido generado
       content = response.dig("choices", 0, "message", "content")
-      raise "No se obtuvo contenido en la respuesta de OpenAI" if content.nil?
+      raise "No se obtuvo respuesta válida de OpenAI" if content.nil?
 
-      content
+      # Crear la respuesta asociada al formulario
+      form.create_response!(
+        text: form.description,
+        ai_response: content,
+        status: "completed"
+      )
+
+      content # Retornar la respuesta generada
     rescue => e
-      puts "Error: #{e.message}"
+      # Manejo de errores
+      Rails.logger.error("Error al generar la respuesta: #{e.message}")
+      form.create_response!(
+        text: form.description,
+        ai_response: "Error al generar la respuesta: #{e.message}",
+        status: "failed"
+      )
       nil
     end
   end

@@ -1,28 +1,49 @@
-<p style="color: green"><%= notice %></p>
+<div class="p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
+  <!-- Notificación -->
+  <% if notice.present? %>
+    <p class="text-green-600 font-semibold mb-4"><%= notice %></p>
+  <% end %>
 
-<%= render @form %>
+  <!-- Renderizar los detalles del formulario -->
 
-<div>
-  <%= link_to "Edit this form", edit_form_path(@form) %> |
-  <%= link_to "Back to forms", forms_path %>
 
-  <%= button_to "Destroy this form", @form, method: :delete %>
+  <!-- Acciones -->
+  <div class="flex items-center gap-4 mb-6">
+    <%= link_to "Volver a Formularios", forms_path, class: "px-4 py-2 bg-gray-600 text-white rounded-md shadow hover:bg-gray-700 transition duration-200" %>
+  </div>
+
+  <!-- Respuesta de OpenAI -->
+  <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">OpenAI Answer</h2>
+    
+    <% if @response.present? %>
+
+
+    <div class="mb-4">
+        <p class="text-sm text-gray-600">
+          <strong class="text-gray-800">Texto proporcionado:</strong>
+          <span class="block mt-1"><%= @response.text || "Texto no proporcionado" %></span>
+        </p>
+      </div>
+
+      
+      <div class="mb-4">
+        <p class="text-sm text-gray-600">
+          <strong class="text-gray-800">Respuesta AI:</strong>
+          <span class="block mt-1"><%= @response.ai_response %></span>
+        </p>
+      </div>
+      
+      
+      <div>
+        <p class="text-sm text-gray-600">
+          <strong class="text-gray-800">Estado:</strong>
+          <span class="block mt-1 capitalize"><%= @response.status || "Estado no definido" %></span>
+        </p>
+      </div>
+
+    <% else %>
+      <p class="text-sm text-gray-600">No se ha generado una respuesta para este formulario aún.</p>
+    <% end %>
+  </div>
 </div>
-
-<h2> Respuesta Open ai </h2>
-<%= form_with model: [@form, @form.responses.build] do |form| %>
-  <p class="mb-4">
-      <strong class="text-lg font-semibold text-gray-700">Respuesta AI:</strong>
-      <span class="block text-gray-600 text-sm"><%= response.ai_response || "No disponible" %></span>
-    </p>
-
-    <p class="mb-4">
-      <strong class="text-lg font-semibold text-gray-700">Texto:</strong>
-      <span class="block text-gray-600 text-sm"><%= response.text || "Texto no proporcionado" %></span>
-    </p>
-
-    <p class="mb-4">
-      <strong class="text-lg font-semibold text-gray-700">Estado:</strong>
-      <span class="block text-gray-600 text-sm capitalize"><%= response.status %></span>
-
-<%end%>
