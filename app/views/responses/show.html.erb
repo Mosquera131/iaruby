@@ -1,0 +1,18 @@
+<div class="max-w-4xl mx-auto mt-8">
+  <p style="color: green" class="text-green-600 text-sm mb-4"><%= notice %></p>
+
+  <!-- Renderiza la parcial -->
+  <%= render @response %>
+
+  <div class="flex justify-between items-center mt-6">
+    <%= link_to "Editar esta respuesta", edit_response_path(@response),
+                class: "text-indigo-600 hover:underline" %>
+    <%= link_to "Volver a respuestas", responses_path,
+                class: "text-gray-600 hover:underline" %>
+
+    <%= button_to "Eliminar esta respuesta", @response, method: :delete,
+                   data: { confirm: "¿Estás seguro?" },
+                   class: "px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700" %>
+  </div>
+</div>
+

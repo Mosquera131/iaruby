@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @form %>
+
+<div>
+  <%= link_to "Edit this form", edit_form_path(@form) %> |
+  <%= link_to "Back to forms", forms_path %>
+
+  <%= button_to "Destroy this form", @form, method: :delete %>
+</div>
+
+<h2> Respuesta Open ai </h2>
+<%= form_with model: [@form, @form.responses.build] do |form| %>
+  <p class="mb-4">
+      <strong class="text-lg font-semibold text-gray-700">Respuesta AI:</strong>
+      <span class="block text-gray-600 text-sm"><%= response.ai_response || "No disponible" %></span>
+    </p>
+
+    <p class="mb-4">
+      <strong class="text-lg font-semibold text-gray-700">Texto:</strong>
+      <span class="block text-gray-600 text-sm"><%= response.text || "Texto no proporcionado" %></span>
+    </p>
+
+    <p class="mb-4">
+      <strong class="text-lg font-semibold text-gray-700">Estado:</strong>
+      <span class="block text-gray-600 text-sm capitalize"><%= response.status %></span>
+
+<%end%>

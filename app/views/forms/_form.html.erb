@@ -1,0 +1,28 @@
+<div class="max-w-xl mx-auto bg-white shadow-lg rounded-lg p-6">
+  <%= form_with(model: form, local: true, class: "space-y-6") do |f| %>
+    <div class="mb-4">
+      <label for="name" class="block text-lg font-semibold text-gray-700">Name:</label>
+      <%= f.text_field :name, class: "form-input block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700" %>
+    </div>
+
+    <div class="mb-4">
+      <label for="description" class="block text-lg font-semibold text-gray-700">Description:</label>
+      <%= f.text_area :description, class: "form-textarea block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700" %>
+    </div>
+
+    <div class="mb-4">
+      <label for="processed_in_job" class="block text-lg font-semibold text-gray-700">Processed in Job:</label>
+      <%= f.select :processed_in_job, 
+        options_for_select([['Hilo Principal', 'Hilo Principal'], ['Job Encolado', 'Job Encolado']], f.object.processed_in_job),
+        {}, 
+        class: "form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700"
+      %>
+    </div>
+
+    <div class="mt-6">
+      <%= f.submit "Save", class: "px-4 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 w-full" %>
+    </div>
+  <% end %>
+</div>
+
+
