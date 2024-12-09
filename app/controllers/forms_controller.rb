@@ -25,9 +25,16 @@ class FormsController < ApplicationController
   def create
     @form = Form.new(form_params)
     if @form.save
-      # Encolar el trabajo para procesar la respuesta y manejar el correo
-      ProcessOpenAiJob.perform_later(@form.id)
-      redirect_to @form, notice: "Formulario creado y enviado para procesamiento."
+      if @form.processed_in_job == "Job Encolado"
+        flash[:notice] = "Tu solicitud está en proceso. Te notificaremos por correo cuando esté lista."
+        # Encolar el trabajo para procesar la respuesta y manejar el correo
+        ProcessOpenAiJob.perform_later(@form.id)
+      else
+        # Procesar directamente en el hilo principal
+        response = ProcessOpenAiJob.new.perform(@form.id)
+        flash[:notice] = "Formulario creado y procesado en el hilo principal. Respuesta: #{response}"
+      end
+      redirect_to @form
     else
       render :new, status: :unprocessable_entity
     end
