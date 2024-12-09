@@ -24,13 +24,10 @@ class FormsController < ApplicationController
   # POST /forms or /forms.json
   def create
     @form = Form.new(form_params)
-
     if @form.save
-      # Generar la respuesta usando el servicio
-      service = OpenService.new
-      service.generate_and_store_response(@form)
-
-      redirect_to @form, notice: "Formulario creado y procesado con éxito."
+      # Encolar el trabajo para procesar la respuesta y manejar el correo
+      ProcessOpenAiJob.perform_later(@form.id)
+      redirect_to @form, notice: "Formulario creado y enviado para procesamiento."
     else
       render :new, status: :unprocessable_entity
     end
@@ -70,6 +67,6 @@ class FormsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def form_params
-      params.require(:form).permit(:name, :description, :processed_in_job)
+      params.require(:form).permit(:name, :description, :processed_in_job, :email)
     end
 end
