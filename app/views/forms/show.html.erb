@@ -6,7 +6,6 @@
 
   <!-- Renderizar los detalles del formulario -->
 
-
   <!-- Acciones -->
   <div class="flex items-center gap-4 mb-6">
     <%= link_to "Volver a Formularios", forms_path, class: "px-4 py-2 bg-gray-600 text-white rounded-md shadow hover:bg-gray-700 transition duration-200" %>
@@ -15,26 +14,22 @@
   <!-- Respuesta de OpenAI -->
   <div class="bg-gray-50 p-4 rounded-lg shadow-md">
     <h2 class="text-xl font-bold text-gray-800 mb-4">OpenAI Answer</h2>
-    
+
     <% if @response.present? %>
-
-
-    <div class="mb-4">
+      <div class="mb-4">
         <p class="text-sm text-gray-600">
           <strong class="text-gray-800">Texto proporcionado:</strong>
           <span class="block mt-1"><%= @response.text || "Texto no proporcionado" %></span>
         </p>
       </div>
 
-      
       <div class="mb-4">
         <p class="text-sm text-gray-600">
           <strong class="text-gray-800">Respuesta AI:</strong>
           <span class="block mt-1"><%= @response.ai_response %></span>
         </p>
       </div>
-      
-      
+
       <div>
         <p class="text-sm text-gray-600">
           <strong class="text-gray-800">Estado:</strong>
@@ -42,6 +37,14 @@
         </p>
       </div>
 
+      <% if @form.avatar.attached? %>
+        <div class="mb-4">
+          <h3 class="text-lg font-semibold text-gray-700">Imagen del Formulario:</h3>
+          <%= image_tag url_for(@form.avatar), alt: "Imagen del Formulario", class: "w-full h-auto rounded-md" %>
+        </div>
+      <% else %>
+        <p class="text-gray-500">No se ha cargado ninguna imagen para este formulario.</p>
+      <% end %>
     <% else %>
       <p class="text-sm text-gray-600">No se ha generado una respuesta para este formulario aún.</p>
     <% end %>

@@ -1,0 +1,29 @@
+<nav class="bg-gray-800 shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <%= link_to "IA BUSCADOR", root_path, class: "text-white text-lg font-bold" %>
+      </div>
+
+      <!-- Links -->
+      <div class="hidden md:flex items-center space-x-8">
+        <%= link_to t('navbar.home'), root_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+      </div>
+
+      <!-- Language Switcher -->
+      <div class="flex items-center">
+        <ul class="flex items-center space-x-6">
+          <li>
+            <div class="language-switcher text-gray-300">
+              <%= link_to "🇬🇧 English", url_for(locale: :en), class: "#{params[:locale] == 'en' ? 'text-white font-bold' : 'hover:text-white'}" %> |
+              <%= link_to "🇨🇴 Español", url_for(locale: :es), class: "#{params[:locale] == 'es' ? 'text-white font-bold' : 'hover:text-white'}" %> |
+              <%= link_to "🇧🇷 Português", url_for(locale: :pt), class: "#{params[:locale] == 'pt' ? 'text-white font-bold' : 'hover:text-white'}" %>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+

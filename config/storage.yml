@@ -1,3 +1,21 @@
+cloudinary_defaults: &cloudinary_defaults
+
+  service: Cloudinary
+  secure: true # Asegura que se usen URLs HTTPS
+
+cloudinary_test:
+  <<: *cloudinary_defaults
+  tags: ["test"]
+
+cloudinary_development:
+  <<: *cloudinary_defaults
+  tags: ["development"]
+
+cloudinary_production:
+  <<: *cloudinary_defaults
+  tags: ["production"]
+
+
 test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>

@@ -1,0 +1,9 @@
+es:
+  job_form:
+    name: "Nombre"
+    description: "Descripción"
+    processed_in_job: "Procesado en Trabajo"
+    main_thread: "Hilo Principal"
+    queued_job: "Trabajo Encolado"
+    email: "Correo Electrónico"
+    save: "Guardar"

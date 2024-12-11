@@ -14,6 +14,12 @@ module IaRuby
     # Configurar Sidekiq como adaptador para Active Job.
     config.active_job.queue_adapter = :sidekiq
 
+    # Ensure all translations from config/locales/*.rb,yml are auto loaded
+    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
+    # Escogiendo diferentes idiomas y espanol como predeterminado
+    config.i18n.default_locale = :es
+    config.i18n.available_locales = [ :es, :en, :pt ]
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.

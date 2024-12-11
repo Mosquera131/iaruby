@@ -28,4 +28,11 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  job_form:
+    name: "Name"
+    description: "Description"
+    processed_in_job: "Processed in Job"
+    main_thread: "Main Thread"
+    queued_job: "Queued Job"
+    email: "Email"
+    save: "Save"

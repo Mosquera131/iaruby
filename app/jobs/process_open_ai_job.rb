@@ -19,26 +19,3 @@ class ProcessOpenAiJob < ApplicationJob
     end
   end
 end
-
-
-# class ProcessOpenAiJob < ApplicationJob
-#   queue_as :default
-
-#   def perform(request_id)
-#     # Buscar la solicitud
-#     request = Request.find(request_id)
-
-#     # Enviar la solicitud a OpenAI
-#     response = OpenAI::Client.new.completions(
-#       model: "text-davinci-003",
-#       prompt: request.prompt,
-#       max_tokens: 100
-#     )
-
-#     # Guardar la respuesta en la tabla responses
-#     request.responses.create(content: response["choices"].first["text"])
-
-#     # Notificar al usuario
-#     UserMailer.response_ready(request.user).deliver_now
-#   end
-# end

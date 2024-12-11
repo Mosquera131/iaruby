@@ -1,7 +1,5 @@
 <% content_for :title, "New form" %>
 
-
-
 <%= render "form", form: @form %>
 
 <br>
@@ -11,10 +9,11 @@
 </div>
 
 
+
 <% if @form.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@form.errors.count, "error") %> prohibió que este formulario se guarde:</h2>
-    <ul>
+  <div id="error_explanation" class="mt-6 p-4 bg-red-50 border border-red-300 rounded-md text-red-700">
+    <h2 class="font-semibold text-lg"><%= pluralize(@form.errors.count, "error") %> prohibió que este formulario se guarde:</h2>
+    <ul class="mt-2 list-disc list-inside">
       <% @form.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>

@@ -1,0 +1,9 @@
+pt:
+  job_form:
+    name: "Nome"
+    description: "Descrição"
+    processed_in_job: "Processado no Trabalho"
+    main_thread: "Thread Principal"
+    queued_job: "Trabalho na Fila"
+    email: "E-mail"
+    save: "Salvar"

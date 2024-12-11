@@ -1,5 +1,6 @@
 class Form < ApplicationRecord
   has_one  :response, dependent: :destroy
+  has_one_attached :avatar
 
   # validaciones
   validates :name, presence: true

@@ -43,6 +43,9 @@ gem "ruby-openai"
 gem "sidekiq"
 gem "redis"
 
+#  assets img cloud
+gem "cloudinary", "~> 2.2"
+
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
